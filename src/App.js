@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from './component/SearchBar';
 import { LoadingOutlined } from '@ant-design/icons';
+import VideoListDefault from './component/VideoListDefault';
 
 
 class App extends Component {
@@ -10,6 +11,13 @@ class App extends Component {
     searchQuery: ''
   }
 
+  componentDidMount() {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=reactjs&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ result: data.items, loading: false });
+      })
+  }
   componentDidUpdate(previousProps, previousState) {
     if (previousState.searchQuery !== this.state.searchQuery) {
       this.setState({ loading: true });
@@ -36,14 +44,10 @@ class App extends Component {
           </div>
         )}
         
-        {this.state.result.map(item => (
-          <a key={item.id.videoId} href={`https://www.youtube.com/watch?v=${item.id.videoId}`}>
-            <div>
-              <div>{item.snippet.title}</div>
-              <img src={item.snippet.thumbnails.medium.url} alt={item.snippet.title}/>                
-            </div>
-          </a>
-        ))}
+          <VideoListDefault
+          listVideo={this.state.result}
+        />
+        
       </div>
     );
   }
