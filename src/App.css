@@ -17,14 +17,14 @@
   padding: 0 5px;
   box-sizing: border-box;
   border: 2px solid #FF4D4D;
+  position: relative;
 }
 
 .list-video-default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: ;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .videoItem {
   width: 320px;

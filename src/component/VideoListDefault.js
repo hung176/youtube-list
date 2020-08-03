@@ -12,6 +12,7 @@ export default class VideoListDefault extends Component {
               <div className="title">{item.snippet.title}</div>              
             </div>
           </a>
+          // <div key={item.id}>{item.title}</div>
         ))}
       </div>
     )

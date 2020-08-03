@@ -9,8 +9,26 @@ const {Text} = Typography;
 
 
 export default class SearchBar extends Component {
-  
+  state = {
+    videos: [],
+    searchQuery: ''
+  }
+  componentDidUpdate(_, previousState) {
+    if(previousState.searchQuery !== this.state.searchQuery){
+      fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${this.state.searchQuery}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
+      // fetch(` https://jsonplaceholder.typicode.com/posts`)  
+        .then(res => res.json())
+        .then(data => {
+          this.setState({ videos: data.items});
+          // this.setState({ videos: data});
+        })
+    } 
+  }
+  // onSelect = value => {
+  //   console.log(value)
+  // }
   render() {
+
     return (
       <div className="search-bar">
         <Text 
@@ -18,16 +36,32 @@ export default class SearchBar extends Component {
           strong type="danger"
         > YOUTUBE
         </Text>
+  
         <AutoComplete
           className="search-form"
           size={"large"}
-          onChange={(value) => this.props.handleChange(value)} 
-          value={this.props.searchQuery}
+          onChange={(value) => this.setState({searchQuery: value})} 
+          value={this.state.searchQuery}
           placeholder="Enter some text here..."
+          // onSelect={this.onSelect}
         >
-          {this.props.result.map((item, index)  => <Option key={index} value={item.snippet.title}>{item.snippet.title}</Option> )}
+          {this.state.videos.map((item, index)  => 
+          <Option 
+            key={index} 
+            value={item.snippet.title}
+            // value={item.title}
+          >
+            {item.snippet.title}
+            {/* {item.title} */}
+          </Option> )}
         </AutoComplete>
-        <Button size={"large"}><SearchOutlined /></Button>
+        <Button 
+          size={"large"}
+          onClick={() => this.props.handleSubmit(this.state.searchQuery)}
+        ><SearchOutlined />
+        </Button>
+        
+       
       </div>
     )
   }
