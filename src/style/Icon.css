@@ -1,0 +1,45 @@
+.box-normal {
+  border: 3px solid red;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 20px;
+  position: relative;
+}
+
+.box {
+  border: 3px solid red;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-right: 20px;
+  position: relative;
+  animation: box 0.5s linear infinite;
+}
+.you {
+  font-size: 35px;
+  color: red;
+  font-weight: 500;
+  position: absolute;
+  top: 11px;
+}
+.tube {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 46px;
+  right: 15px;
+}
+@keyframes box {
+  to {
+    transform: rotate(360deg);
+  }
+}

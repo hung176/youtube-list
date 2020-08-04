@@ -3,9 +3,9 @@ import { SearchOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../App.css';
 import { AutoComplete, Button } from 'antd';
-import { Typography } from 'antd';
+import  Icon from '../style/Icon';
 const {Option} = AutoComplete;
-const {Text} = Typography;
+
 
 
 export default class SearchBar extends Component {
@@ -31,11 +31,7 @@ export default class SearchBar extends Component {
 
     return (
       <div className="search-bar">
-        <Text 
-          className="icon"
-          strong type="danger"
-        > YOUTUBE
-        </Text>
+        <Icon loading= {this.props.loading}/>
   
         <AutoComplete
           className="search-form"
