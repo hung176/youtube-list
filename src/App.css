@@ -36,18 +36,14 @@
   color: black;
   font-weight: 600;
 }
-.btnPlaylistForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 150px;
-  position: absolute;
-  right: 272px;
-  top:42px;
+
+#btn{
+  width: 65px;
+  height: 60px;
+  font-size: 19px;
 }
-.btnPlaylist {
-  font-size: 35px;
-  color: #FF4D4D;
-  margin-right: 7px;
+.Play-list {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
 }

@@ -13,16 +13,16 @@ class App extends Component {
 
   callAPI = (value) => {
     this.setState({ loading: true })
-    // fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({ result: data.items, loading: false })
-    //   })
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
       .then(res => res.json())
       .then(data => {
-        this.setState({ result: data, loading: false })
+        this.setState({ result: data.items, loading: false })
       })
+    // fetch('https://jsonplaceholder.typicode.com/posts')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({ result: data, loading: false })
+    //   })
   }
 
   componentDidMount () {
@@ -31,14 +31,6 @@ class App extends Component {
 
   handleSubmit = (value) => {
     this.callAPI(value)
-  }
-
-  handleSelected = (value) => {
-    const title = this.state.selectedVideo
-    this.setState({
-      ...this.state,
-      selectedVideo: [...title, value]
-    })
   }
 
   render () {
@@ -53,13 +45,11 @@ class App extends Component {
 
           <VideoListDefault
             listVideo={this.state.result}
-            handleSelected={this.handleSelected}
           />
         </div>
 
         <div>
           <Playlist
-            
           />
         </div>
 

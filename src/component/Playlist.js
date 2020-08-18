@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { MenuUnfoldOutlined } from '@ant-design/icons'
-import 'antd/dist/antd.css'
-import { Input, Drawer, List } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
+import { Input, Drawer, List, Button } from 'antd'
 
 const Playlist = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false)
@@ -20,6 +19,7 @@ const Playlist = () => {
     e.preventDefault()
     const listItem = [...playlist, namePlaylist]
     if (namePlaylist) setPlaylist(listItem)
+    setNamePlaylist('')
   }
 
   const handleChange = (e) => {
@@ -28,12 +28,15 @@ const Playlist = () => {
 
   return (
     <div>
-
-      <div className='btnPlaylistForm' onClick={showDrawer}>
-        <MenuUnfoldOutlined
-          className='btnPlaylist'
+      <div className='Play-list'>
+        <Button
+          type='danger'
+          id='btn'
+          shape='circle'
+          icon={<PlusOutlined />}
+          size='large'
+          onClick={showDrawer}
         />
-        <span style={{ marginTop: '2px', fontSize: '20px' }}>Playlist</span>
       </div>
 
       <Drawer
@@ -48,6 +51,7 @@ const Playlist = () => {
           <label>Create new playlist</label>
           <Input
             type='text'
+            value={namePlaylist}
             onChange={handleChange}
             style={{ marginTop: '10px' }}
           />

@@ -18,8 +18,8 @@ export default class SearchBar extends Component {
       // fetch(`https://jsonplaceholder.typicode.com/posts`)
         .then(res => res.json())
         .then(data => {
-          // this.setState({ videos: data.items })
-          this.setState({ videos: data })
+          this.setState({ videos: data.items })
+          // this.setState({ videos: data })
         })
     }
   }
@@ -45,8 +45,8 @@ export default class SearchBar extends Component {
               value={item.snippet.title}
               // value={item.title}
             >
-              {/* {item.snippet.title} */}
-              {item.title}
+              {item.snippet.title}
+              {/* {item.title} */}
             </Option>)}
         </AutoComplete>
         <Button
