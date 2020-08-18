@@ -14,12 +14,12 @@ export default class SearchBar extends Component {
 
   componentDidUpdate (_, previousState) {
     if (previousState.searchQuery !== this.state.searchQuery) {
-      fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${this.state.searchQuery}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
-      // fetch(` https://jsonplaceholder.typicode.com/posts`)
+      fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${this.state.searchQuery}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
+      // fetch(`https://jsonplaceholder.typicode.com/posts`)
         .then(res => res.json())
         .then(data => {
-          this.setState({ videos: data.items })
-          // this.setState({ videos: data});
+          // this.setState({ videos: data.items })
+          this.setState({ videos: data })
         })
     }
   }
@@ -43,10 +43,10 @@ export default class SearchBar extends Component {
             <Option
               key={index}
               value={item.snippet.title}
-            // value={item.title}
+              // value={item.title}
             >
-              {item.snippet.title}
-              {/* {item.title} */}
+              {/* {item.snippet.title} */}
+              {item.title}
             </Option>)}
         </AutoComplete>
         <Button

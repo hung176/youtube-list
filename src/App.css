@@ -1,6 +1,6 @@
 .App {
-  margin: 0;
-  padding: 0;
+
+  
 }
 .search-bar {
   display: flex;
@@ -35,4 +35,19 @@
   margin-top: 10px;
   color: black;
   font-weight: 600;
+}
+.btnPlaylistForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 150px;
+  position: absolute;
+  right: 272px;
+  top:42px;
+}
+.btnPlaylist {
+  font-size: 35px;
+  color: #FF4D4D;
+  margin-right: 7px;
 }
