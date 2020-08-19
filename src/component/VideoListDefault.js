@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css'
 import '../style/VideoItem.css'
 import { PlusCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addVideos } from '../states/videoReducer'
 
 const VideoListDefault = ({ listVideo }) => {
