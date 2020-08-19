@@ -9,7 +9,7 @@
 }
 
 .videoItem:hover .imageItem {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 .btn {
   position: absolute;

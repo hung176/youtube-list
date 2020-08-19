@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
 import { Input, Drawer, List } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { addPlaylist } from '../states/playlistReducer'
 
 const Playlist = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false)
-  const [namePlaylist, setNamePlaylist] = useState('')
-  const [playlist, setPlaylist] = useState([])
+  const [nameItem, setNameItem] = useState('')
+  const [nameList, setNameList] = useState([])
+
+  const updatePlaylist = {
+    id: Math.random(),
+    title: nameItem,
+    videos: []
+  }
+  const playlist = useSelector(state => {
+    return state.addPlaylist
+  })
+
+  const dispatch = useDispatch()
 
   const showDrawer = () => {
     setVisibleDrawer(true)
@@ -16,13 +29,14 @@ const Playlist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const listItem = [...playlist, namePlaylist]
-    if (namePlaylist) setPlaylist(listItem)
-    setNamePlaylist('')
+    const listItem = [...nameList, nameItem]
+    if (nameItem) setNameList(listItem)
+    setNameItem('')
+    dispatch(addPlaylist(updatePlaylist))
   }
 
   const handleChange = (e) => {
-    setNamePlaylist(e.target.value)
+    setNameItem(e.target.value)
   }
 
   return (
@@ -40,7 +54,7 @@ const Playlist = () => {
       <Drawer
         title='Play List'
         placement='right'
-        width={500}
+        width={400}
         closable={false}
         onClose={onClose}
         visible={visibleDrawer}
@@ -49,7 +63,7 @@ const Playlist = () => {
           <label>Create new playlist</label>
           <Input
             type='text'
-            value={namePlaylist}
+            value={nameItem}
             onChange={handleChange}
             style={{ marginTop: '10px' }}
           />
@@ -59,7 +73,7 @@ const Playlist = () => {
           dataSource={playlist}
           renderItem={item => (
             <List.Item>
-              {item}
+              {item.title}
             </List.Item>
           )}
         />
