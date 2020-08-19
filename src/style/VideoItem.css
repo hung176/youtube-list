@@ -1,0 +1,36 @@
+.videoItem {
+  position: relative;
+}
+
+.imageItem {
+  opacity: 1;
+  display: block;
+  transition: 1s ease;
+}
+
+.videoItem:hover .imageItem {
+  opacity: 0.2;
+}
+.btn {
+  position: absolute;
+  font-size: 40px;
+  color: #FF4D4D;
+  opacity: 0;
+  transition: 1s ease;
+  cursor: pointer;
+}
+
+.videoItem:hover .btn{
+  opacity: 1;
+}
+
+.btn-add {
+  top: 35%;
+  right: 35%;
+}
+
+.btn-play {
+  top: 35%;
+  left: 35%;
+}
+

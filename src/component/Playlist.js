@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { PlusOutlined } from '@ant-design/icons'
-import { Input, Drawer, List, Button } from 'antd'
+import { Input, Drawer, List } from 'antd'
 
 const Playlist = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false)
@@ -28,15 +27,14 @@ const Playlist = () => {
 
   return (
     <div>
-      <div className='Play-list'>
-        <Button
-          type='danger'
-          id='btn'
-          shape='circle'
-          icon={<PlusOutlined />}
-          size='large'
+      <div>
+        <button
+          className='btn-play-list'
           onClick={showDrawer}
-        />
+        >
+          <div style={{ marginBottom: '-9px' }}>Play</div>
+          <div>List</div>
+        </button>
       </div>
 
       <Drawer

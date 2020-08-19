@@ -13,7 +13,7 @@ class App extends Component {
 
   callAPI = (value) => {
     this.setState({ loading: true })
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
       .then(res => res.json())
       .then(data => {
         this.setState({ result: data.items, loading: false })
