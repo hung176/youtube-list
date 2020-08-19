@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addVideos } from '../states/videoReducer'
 
 const VideoListDefault = ({ listVideo }) => {
-  const addVideo = useSelector(state => {
-    return state.addVideos
-  })
+  // const addVideo = useSelector(state => {
+  //   return state.addVideos
+  // })
 
   const dispatch = useDispatch()
 
