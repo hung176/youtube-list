@@ -1,14 +1,21 @@
-// actions
-const ADD_VIDEO = 'ADD_VIDEO'
-// const REMOVE_VIDEO = 'REMOVE_VIDEO'
+// action
+const CLICK_VIDEO = 'CLICK_VIDEO'
 
 // initialState
-const initialState = []
+const initialState = {
+  title: '',
+  id: ''
+}
+
 // reducer
+
 export const videoReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_VIDEO:
-      return [...state, action.payload]
+    case CLICK_VIDEO:
+      return {
+        title: action.payload.snippet.title,
+        id: action.payload.id.videoId
+      }
 
     default:
       return state
@@ -16,9 +23,9 @@ export const videoReducers = (state = initialState, action) => {
 }
 
 // actionCreator
-export const addVideos = (video) => {
+export const clickVideo = (video) => {
   return {
-    type: ADD_VIDEO,
+    type: CLICK_VIDEO,
     payload: video
   }
 }

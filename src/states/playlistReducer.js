@@ -1,6 +1,8 @@
 // actions
-const ADD_PLAYLIST = 'ADD_PLAYLIST'
-// const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST'
+const ADD_PLAYLIST_NAME = 'ADD_PLAYLIST_NAME'
+const ADD_VIDEO_TO_PLAYLIST = 'ADD_VIDEO_TO_PLAYLIST'
+// const REMOVE_PLAYLIST_NAME = 'REMOVE_PLAYLIST_NAME'
+// const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST'
 
 // initialState
 const initialState = [
@@ -17,10 +19,19 @@ const initialState = [
 ]
 
 // reducer
-export const playReducers = (state = initialState, action) => {
+export const playlistReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_PLAYLIST:
+    case ADD_PLAYLIST_NAME:
       return [...state, action.payload]
+
+    case ADD_VIDEO_TO_PLAYLIST:
+      return (
+        state.map(playlist => (
+          playlist.id === action.payload.id
+            ? { ...playlist, videos: [...playlist.videos, action.payload.video] }
+            : playlist
+        ))
+      )
 
     default:
       return state
@@ -28,9 +39,16 @@ export const playReducers = (state = initialState, action) => {
 }
 
 // actionCreator
-export const addPlaylist = (playlist) => {
+export const addPlaylistName = (playlistName) => {
   return {
-    type: ADD_PLAYLIST,
-    payload: playlist
+    type: ADD_PLAYLIST_NAME,
+    payload: playlistName
+  }
+}
+
+export const addVideoToPlaylist = (video) => {
+  return {
+    type: ADD_VIDEO_TO_PLAYLIST,
+    payload: video
   }
 }

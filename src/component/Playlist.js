@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import { Input, Drawer, List } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { addPlaylist } from '../states/playlistReducer'
+import { addPlaylistName } from '../states/playlistReducer'
 
 const Playlist = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false)
   const [nameItem, setNameItem] = useState('')
-  const [nameList, setNameList] = useState([])
 
   const updatePlaylist = {
     id: Math.random(),
     title: nameItem,
     videos: []
   }
-  const playlist = useSelector(state => {
-    return state.addPlaylist
+
+  const playlistName = useSelector(state => {
+    return state.playlist
   })
 
   const dispatch = useDispatch()
@@ -29,10 +29,8 @@ const Playlist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const listItem = [...nameList, nameItem]
-    if (nameItem) setNameList(listItem)
+    dispatch(addPlaylistName(updatePlaylist))
     setNameItem('')
-    dispatch(addPlaylist(updatePlaylist))
   }
 
   const handleChange = (e) => {
@@ -70,7 +68,7 @@ const Playlist = () => {
         </form>
 
         <List
-          dataSource={playlist}
+          dataSource={playlistName}
           renderItem={item => (
             <List.Item>
               {item.title}

@@ -33,4 +33,6 @@
   top: 35%;
   left: 35%;
 }
-
+.list-add-video {
+  display: flex;
+}

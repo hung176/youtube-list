@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import { playReducers } from './playlistReducer'
+import { playlistReducers } from './playlistReducer'
 import { videoReducers } from './videoReducer'
 
-const rootReducer = combineReducers({
-  addPlaylist: playReducers,
-  addVideos: videoReducers
+export const combineReducer = combineReducers({
+  playlist: playlistReducers,
+  video: videoReducers
 })
-
-export default rootReducer

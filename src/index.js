@@ -5,15 +5,13 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import rootReducer from './states/index'
+import { combineReducer } from './states'
 
-const store = createStore(rootReducer)
+const store = createStore(combineReducer)
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </Provider>,
   document.getElementById('root')
 )
