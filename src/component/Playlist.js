@@ -13,10 +13,7 @@ const Playlist = () => {
     videos: []
   }
 
-  const playlistName = useSelector(state => {
-    return state.playlist
-  })
-
+  const playlistName = useSelector(state => state.playlist)
   const dispatch = useDispatch()
 
   const showDrawer = () => {
@@ -29,13 +26,12 @@ const Playlist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addPlaylistName(updatePlaylist))
+    const checkName = playlistName.some(playlist => playlist.title === nameItem)
+    if (!checkName) dispatch(addPlaylistName(updatePlaylist))
     setNameItem('')
   }
 
-  const handleChange = (e) => {
-    setNameItem(e.target.value)
-  }
+  const handleChange = (e) => setNameItem(e.target.value)
 
   return (
     <div>

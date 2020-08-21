@@ -4,21 +4,30 @@ import '../style/VideoItem.css'
 import { PlusCircleOutlined, PlayCircleOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { clickVideo } from '../states/videoReducer'
+import { addVideoToPlaylist, checkboxPlaylist } from '../states/playlistReducer'
 import { Modal, List, Checkbox } from 'antd'
 
 const VideoListDefault = ({ listVideo }) => {
   const [visibleModel, setVisibleModel] = useState(false)
   const dispatch = useDispatch()
-  const videoInfor = useSelector(state => state.video)
-  const playlistName = useSelector(state => state.playlist)
+  const video = useSelector(state => state.video)
+  const playlist = useSelector(state => state.playlist)
 
   const showModal = () => setVisibleModel(true)
-  const handleOk = e => setVisibleModel(false)
+  const handleOk = e => {
+    setVisibleModel(false)
+    dispatch(addVideoToPlaylist(video))
+    console.log(playlist)
+  }
   const handleCancel = e => setVisibleModel(false)
 
   const handleClick = (item) => {
     showModal()
     dispatch(clickVideo(item))
+  }
+
+  const onChange = (e, title) => {
+    dispatch(checkboxPlaylist({ title, status: e.target.checked }))
   }
 
   return (
@@ -50,11 +59,11 @@ const VideoListDefault = ({ listVideo }) => {
       >
         <div>
           <List
-            dataSource={playlistName}
+            dataSource={playlist}
             size='large'
             renderItem={item => (
               <div>
-                <Checkbox>
+                <Checkbox onChange={(e) => onChange(e, item.title)}>
                   {item.title}
                 </Checkbox>
               </div>

@@ -4,7 +4,8 @@ const CLICK_VIDEO = 'CLICK_VIDEO'
 // initialState
 const initialState = {
   title: '',
-  id: ''
+  id: '',
+  image: ''
 }
 
 // reducer
@@ -14,7 +15,8 @@ export const videoReducers = (state = initialState, action) => {
     case CLICK_VIDEO:
       return {
         title: action.payload.snippet.title,
-        id: action.payload.id.videoId
+        id: action.payload.id.videoId,
+        image: action.payload.snippet.thumbnails.default.url
       }
 
     default:
