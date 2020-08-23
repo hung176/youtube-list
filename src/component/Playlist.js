@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Input, Drawer, List } from 'antd'
+import { MenuFoldOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPlaylistName } from '../states/playlistReducer'
+import { filterPlaylist, getData } from '../states/filterplaylist'
+import '../App.css'
+import { Link } from 'react-router-dom'
 
 const Playlist = () => {
   const [visibleDrawer, setVisibleDrawer] = useState(false)
@@ -13,10 +17,11 @@ const Playlist = () => {
     videos: []
   }
 
-  const playlistName = useSelector(state => state.playlist)
+  const playlist = useSelector(state => state.playlist)
   const dispatch = useDispatch()
 
   const showDrawer = () => {
+    dispatch(getData(playlist))
     setVisibleDrawer(true)
   }
 
@@ -26,7 +31,7 @@ const Playlist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const checkName = playlistName.some(playlist => playlist.title === nameItem)
+    const checkName = playlist.some(playlist => playlist.title === nameItem)
     if (!checkName) dispatch(addPlaylistName(updatePlaylist))
     setNameItem('')
   }
@@ -64,10 +69,13 @@ const Playlist = () => {
         </form>
 
         <List
-          dataSource={playlistName}
+          dataSource={playlist}
           renderItem={item => (
-            <List.Item>
-              {item.title}
+            <List.Item
+              className='playlist-item'
+              onClick={() => dispatch(filterPlaylist(item.title))}
+            >
+              <Link to='/allplaylist'><MenuFoldOutlined /> {item.title}</Link>
             </List.Item>
           )}
         />

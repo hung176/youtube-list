@@ -1,0 +1,32 @@
+.header-playlist {
+  color: #FF4D4D;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 30px;
+}
+
+.title-playlist {
+font-size: 30px;
+font-weight: 500;
+}
+.card-video-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.playlist-container {
+  width: 60%;
+  margin: 0 auto;
+}
+.iframe-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.iframe-player iframe {
+  width: 837px;
+  height: 471px;
+}
+

@@ -17,7 +17,6 @@ const VideoListDefault = ({ listVideo }) => {
   const handleOk = e => {
     setVisibleModel(false)
     dispatch(addVideoToPlaylist(video))
-    console.log(playlist)
   }
   const handleCancel = e => setVisibleModel(false)
 
@@ -52,10 +51,10 @@ const VideoListDefault = ({ listVideo }) => {
       ))}
 
       <Modal
-        title='Add video to playlist below'
         visible={visibleModel}
         onOk={handleOk}
         onCancel={handleCancel}
+        width={330}
       >
         <div>
           <List
@@ -63,7 +62,7 @@ const VideoListDefault = ({ listVideo }) => {
             size='large'
             renderItem={item => (
               <div>
-                <Checkbox onChange={(e) => onChange(e, item.title)}>
+                <Checkbox onChange={(e) => onChange(e, item.title)} style={{ fontSize: '22px' }}>
                   {item.title}
                 </Checkbox>
               </div>

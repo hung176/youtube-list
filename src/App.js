@@ -1,62 +1,27 @@
-import React, { Component } from 'react'
-import SearchBar from './component/SearchBar'
-import VideoListDefault from './component/VideoListDefault'
-import Playlist from './component/Playlist'
+import React from 'react'
+import Home from './component/Home'
+import AllPlayList from './component/AllPlayList'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
 
-class App extends Component {
-  state = {
-    result: [],
-    loading: false,
-    searchQuery: '',
-    playList: [{}]
-  }
+function App () {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
 
-  callAPI = (value) => {
-    this.setState({ loading: true })
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${value}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ result: data.items, loading: false })
-      })
-    // fetch('https://jsonplaceholder.typicode.com/posts')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({ result: data, loading: false })
-    //   })
-  }
+        <Route path='/allplaylist'>
+          <AllPlayList />
+        </Route>
 
-  componentDidMount () {
-    this.callAPI('')
-  }
-
-  handleSubmit = (value) => {
-    this.callAPI(value)
-  }
-
-  render () {
-    return (
-      <div className='App'>
-        <div className='searchbar-listvideo'>
-          <SearchBar
-            result={this.state.result}
-            onSubmit={this.handleSubmit}
-            loading={this.state.loading}
-          />
-
-          <VideoListDefault
-            listVideo={this.state.result}
-          />
-        </div>
-
-        <div>
-          <Playlist
-            playlist={this.state}
-          />
-        </div>
-
-      </div>
-    )
-  }
+      </Switch>
+    </Router>
+  )
 }
 
 export default App

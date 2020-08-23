@@ -16,7 +16,7 @@ export const videoReducers = (state = initialState, action) => {
       return {
         title: action.payload.snippet.title,
         id: action.payload.id.videoId,
-        image: action.payload.snippet.thumbnails.default.url
+        image: action.payload.snippet.thumbnails.medium.url
       }
 
     default:
