@@ -29,4 +29,10 @@ font-weight: 500;
   width: 837px;
   height: 471px;
 }
+@media only screen and (max-width: 415px) {
+  .iframe-player iframe {
+    width: 400px;
+    height: 330px;
+  }
+}
 

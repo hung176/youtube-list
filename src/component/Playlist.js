@@ -53,7 +53,7 @@ const Playlist = () => {
       <Drawer
         title='Play List'
         placement='right'
-        width={400}
+        width={200}
         closable={false}
         onClose={onClose}
         visible={visibleDrawer}

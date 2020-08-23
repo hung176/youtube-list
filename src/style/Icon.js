@@ -5,7 +5,7 @@ import classNames from 'classnames'
 const Icon = (props) => {
   const classname = classNames({
     box: props.loading,
-    'box-normal': !props.loading
+    'box-normal': !props.loading,
   })
   return (
     <div className={classname}>
