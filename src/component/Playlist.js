@@ -41,13 +41,10 @@ const Playlist = () => {
   return (
     <div>
       <div>
-        <button
+        <MenuFoldOutlined
           className='btn-play-list'
           onClick={showDrawer}
-        >
-          <div style={{ marginBottom: '-9px' }}>Play</div>
-          <div>List</div>
-        </button>
+        />
       </div>
 
       <Drawer

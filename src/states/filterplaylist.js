@@ -1,6 +1,7 @@
 
 const FILTER_PLAYLIST = 'FILTER_PLAYLIST'
 const GET_DATA = 'GET_DATA'
+const REMOVE_VIDEO = 'REMOVE_VIDEO'
 
 // reducer
 export const filterPlaylistReducer = (state = [], action) => {
@@ -10,6 +11,13 @@ export const filterPlaylistReducer = (state = [], action) => {
 
     case GET_DATA:
       return action.payload
+
+    case REMOVE_VIDEO:
+      return (
+        state.map(playlist => (
+          { ...playlist, videos: playlist.videos.filter(video => video.id !== action.payload) }
+        ))
+      )
 
     default:
       return state
@@ -28,5 +36,12 @@ export const filterPlaylist = (titlePlaylist) => {
   return {
     type: FILTER_PLAYLIST,
     payload: titlePlaylist
+  }
+}
+
+export const removeVideoStateFiltered = (video) => {
+  return {
+    type: REMOVE_VIDEO,
+    payload: video
   }
 }

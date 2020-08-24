@@ -2,7 +2,7 @@
 const ADD_PLAYLIST_NAME = 'ADD_PLAYLIST_NAME'
 const ADD_VIDEO_TO_PLAYLIST = 'ADD_VIDEO_TO_PLAYLIST'
 // const REMOVE_PLAYLIST_NAME = 'REMOVE_PLAYLIST_NAME'
-// const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST'
+const REMOVE_VIDEO_FROM_PLAYLIST = 'REMOVE_VIDEO_FROM_PLAYLIST'
 const CHECKBOX_PLAYLIST = 'CHECKBOX_PLAYLIST'
 
 // initialState
@@ -40,6 +40,12 @@ export const playlistReducers = (state = initialState, action) => {
             : playlist
         ))
       )
+    case REMOVE_VIDEO_FROM_PLAYLIST:
+      return (
+        state.map(playlist => (
+          { ...playlist, videos: playlist.videos.filter(video => video.id !== action.payload) }
+        ))
+      )
 
     default:
       return state
@@ -65,5 +71,12 @@ export const checkboxPlaylist = (action) => {
   return {
     type: CHECKBOX_PLAYLIST,
     payload: action
+  }
+}
+
+export const removeVideo = (video) => {
+  return {
+    type: REMOVE_VIDEO_FROM_PLAYLIST,
+    payload: video
   }
 }

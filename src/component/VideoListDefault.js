@@ -52,6 +52,7 @@ const VideoListDefault = ({ listVideo }) => {
 
       <Modal
         visible={visibleModel}
+        centered
         onOk={handleOk}
         onCancel={handleCancel}
         width={330}
@@ -62,7 +63,11 @@ const VideoListDefault = ({ listVideo }) => {
             size='large'
             renderItem={item => (
               <div>
-                <Checkbox onChange={(e) => onChange(e, item.title)} style={{ fontSize: '22px' }}>
+                <Checkbox
+                  checked={item.checked}
+                  onChange={(e) => onChange(e, item.title)}
+                  style={{ fontSize: '22px' }}
+                >
                   {item.title}
                 </Checkbox>
               </div>

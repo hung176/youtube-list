@@ -35,18 +35,11 @@
 }
 
 .btn-play-list{
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  outline: none;
-  border: 3px solid #FF4D4D;
-  background: white;
-  font-size: 20px;
-  color: #FF4D4D;
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
+ font-size: 45px;
+ color: #FF4D4D;
+ position: absolute;
+ right: 10%;
+ top: 5%;
 }
 .playlist-item {
   cursor: pointer;
