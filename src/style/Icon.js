@@ -1,11 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import './Icon.css'
 import classNames from 'classnames'
+import { getVideos } from '../states'
 
-const Icon = (props) => {
+const Icon = () => {
+  const { isFetching } = useSelector(getVideos)
   const classname = classNames({
-    box: props.loading,
-    'box-normal': !props.loading,
+    box: isFetching,
+    'box-normal': !isFetching
   })
   return (
     <div className={classname}>

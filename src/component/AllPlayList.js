@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeVideo } from '../states/playlistReducer'
-import { removeVideoStateFiltered } from '../states/filterplaylist'
-import { Card, Empty } from 'antd'
-import { DeleteTwoTone, BackwardOutlined } from '@ant-design/icons'
+import { removeVideoStateFiltered, filterPlaylist } from '../states/filterplaylist'
+import { Card, Empty, List } from 'antd'
+import { DeleteTwoTone, BackwardOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import '../style/allplaylist.css'
 import { Link } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ const { Meta } = Card
 
 function AllPlayList () {
   const playlistFiltered = useSelector(state => state.filterPlaylist)
+  const playlist = useSelector(state => state.playlist)
   const dispatch = useDispatch()
   const [videoTitle, setVideoTitle] = useState('')
   const [videoId, setVideoId] = useState('')
@@ -31,12 +32,24 @@ function AllPlayList () {
 
     return (
       <div>
-        <Link to='/'><div className='header-playlist'><BackwardOutlined />PLAYLIST</div></Link>
-        <div className='iframe-player'>
-          <iframe title={videoTitle} src={url} allowFullScreen />
-          <div>{videoTitle}</div>
-        </div>
-        <div className='playlist-container'>
+        <div><Link to='/'><div className='header-playlist'><BackwardOutlined />BACK HOME</div></Link></div>
+        <div className='container'>
+          <div className='playlist-sidebar'>
+            <List
+              dataSource={playlist}
+              renderItem={item => (
+                <List.Item
+                  // onClick={() => )}
+                >
+                  <Link to='/allplaylist'><MenuFoldOutlined /> {item.title}</Link>
+                </List.Item>
+              )}
+            />
+          </div>
+          <div className='iframe-player'>
+            <iframe title={videoTitle} src={url} allowFullScreen />
+            <div>{videoTitle}</div>
+          </div>
           <div className='card-video-container'>
             {videos.map(video => (
               <Card
@@ -56,7 +69,9 @@ function AllPlayList () {
               </Card>
             ))}
           </div>
+
         </div>
+
       </div>
     )
   } else {

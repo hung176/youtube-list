@@ -7,31 +7,35 @@ import { clickVideo } from '../states/videoReducer'
 import { addVideoToPlaylist, checkboxPlaylist } from '../states/playlistReducer'
 import { Modal, List, Checkbox } from 'antd'
 
-const VideoListDefault = ({ listVideo }) => {
-  const [visibleModel, setVisibleModel] = useState(false)
-  const dispatch = useDispatch()
-  const video = useSelector(state => state.video)
-  const playlist = useSelector(state => state.playlist)
+import { getVideos } from '../states'
 
-  const showModal = () => setVisibleModel(true)
-  const handleOk = e => {
-    setVisibleModel(false)
-    dispatch(addVideoToPlaylist(video))
-  }
-  const handleCancel = e => setVisibleModel(false)
+const VideoListDefault = () => {
+  // const [visibleModel, setVisibleModel] = useState(false)
+  // const dispatch = useDispatch()
+  // const video = useSelector(state => state.video)
+  // const playlist = useSelector(state => state.playlist)
 
-  const handleClick = (item) => {
-    showModal()
-    dispatch(clickVideo(item))
-  }
+  // const showModal = () => setVisibleModel(true)
+  // const handleOk = e => {
+  //   setVisibleModel(false)
+  //   dispatch(addVideoToPlaylist(video))
+  // }
+  // const handleCancel = e => setVisibleModel(false)
 
-  const onChange = (e, title) => {
-    dispatch(checkboxPlaylist({ title, status: e.target.checked }))
-  }
+  // const handleClick = (item) => {
+  //   showModal()
+  //   dispatch(clickVideo(item))
+  // }
+
+  // const onChange = (e, title) => {
+  //   dispatch(checkboxPlaylist({ title, status: e.target.checked }))
+  // }
+
+  const { videos } = useSelector(getVideos)
 
   return (
     <div className='list-video-default'>
-      {listVideo.map(item => (
+      {videos.map(item => (
         <div className='videoItem' key={item.id.videoId}>
           <img
             src={item.snippet.thumbnails.medium.url}
@@ -42,7 +46,7 @@ const VideoListDefault = ({ listVideo }) => {
 
           <PlusCircleOutlined
             className='btn btn-add'
-            onClick={() => handleClick(item)}
+            // onClick={() => handleClick(item)}
           />
 
           <PlayCircleOutlined className='btn btn-play' />
@@ -50,7 +54,7 @@ const VideoListDefault = ({ listVideo }) => {
       // <div key={item.id}>{item.title}</div>
       ))}
 
-      <Modal
+      {/* <Modal
         visible={visibleModel}
         centered
         onOk={handleOk}
@@ -74,7 +78,7 @@ const VideoListDefault = ({ listVideo }) => {
             )}
           />
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

@@ -37,9 +37,6 @@
 .btn-play-list{
  font-size: 45px;
  color: #FF4D4D;
- position: absolute;
- right: 10%;
- top: 5%;
 }
 .playlist-item {
   cursor: pointer;
