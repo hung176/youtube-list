@@ -1,6 +1,5 @@
 import React from 'react'
-import Home from './component/Home'
-import AllPlayList from './component/AllPlayList'
+import Home from './component/home/Home'
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,11 +13,6 @@ function App () {
         <Route exact path='/'>
           <Home />
         </Route>
-
-        <Route path='/allplaylist'>
-          <AllPlayList />
-        </Route>
-
       </Switch>
     </Router>
   )

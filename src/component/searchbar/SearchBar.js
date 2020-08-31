@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { SearchOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
-import '../App.css'
+import '../../App.css'
 import { AutoComplete, Button } from 'antd'
-import Icon from '../style/Icon'
 
-import { SearchVideo } from '../states'
-import fetchingData from '../api/fetchingData'
+import { SearchVideo } from '../../states'
 
 const { Option } = AutoComplete
 
@@ -16,17 +14,21 @@ export default function SearchBar () {
   const [queries, setQueries] = useState('')
   const [option, setOption] = useState([])
 
-  useEffect(() => {
-    fetchingData(queries).then(video => setOption(video.items))
-  }, [queries])
+  // useEffect(() => {
+  //   if (queries !== '') {
+  //     console.log('useEffect2 has called')
+  //     fetch(`http://clients1.google.com/complete/search?hl=en&output=toolbar&q=mikami`)
+  //       .then(data => console.log(data))
+  //   }
+  // }, [queries])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(SearchVideo(queries))
+    setQueries('')
   }
   return (
     <div className='search-bar'>
-      <Icon />
       <form onSubmit={handleSubmit}>
         <AutoComplete
           className='search-form'
@@ -44,8 +46,8 @@ export default function SearchBar () {
             </Option>)}
         </AutoComplete>
         <Button
+          type='submit'
           size='large'
-          type='onsubmit'
         ><SearchOutlined />
         </Button>
       </form>

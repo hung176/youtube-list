@@ -5,7 +5,7 @@ export const namespace = 'search/queries'
 export const SEARCH_VIDEO = 'SEARCH_VIDEO'
 
 // reducer
-export default function searchReducer (state = 'abc', action) {
+export default function searchReducer (state = '', action) {
   switch (action.type) {
     case SEARCH_VIDEO:
       return action.payload

@@ -45,6 +45,7 @@ export const fetchVideos = (queries) => dispatch => {
   })
 
   fetchingData(queries)
+    .then(res => res.json())
     .then(videos => dispatch({
       type: FETCH_VIDEO_SUCCESS,
       payload: videos.items

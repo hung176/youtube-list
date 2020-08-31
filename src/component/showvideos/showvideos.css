@@ -1,5 +1,22 @@
+
+.container-videoItem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
 .videoItem {
+  transition: all 0.3s linear;
+  text-align: center;
+  height: fit-content;
   position: relative;
+}
+.videoItem h4 {
+  text-transform: capitalize;
+  margin-top: 5px;
+}
+.videoItem:hover {
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .imageItem {
@@ -9,7 +26,7 @@
 }
 
 .videoItem:hover .imageItem {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 .btn {
   position: absolute;
@@ -33,6 +50,4 @@
   top: 35%;
   left: 35%;
 }
-.list-add-video {
-  display: flex;
-}
+
