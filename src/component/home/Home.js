@@ -31,11 +31,9 @@ export default function Home () {
         breakpoint='md'
         collapsedWidth='0'
         theme='light'
-        // onBreakpoint={broken => {
-        //   console.log(broken)
-        // }}
-        // onCollapse={(collapsed, type) => {
-        // }}
+        style={{
+          left: 0
+        }}
       >
         <Sidebar />
       </Sider>

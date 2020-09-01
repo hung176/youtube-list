@@ -1,0 +1,14 @@
+.video-in-playlist {
+  transition: all 0.3s linear;
+  height: fit-content;
+  display: flex;
+}
+
+.video-in-playlist  h4 {
+  text-transform: capitalize;
+  margin-left: 15px;
+}
+
+.video-in-playlist:hover {
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+}

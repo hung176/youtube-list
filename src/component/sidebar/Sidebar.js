@@ -2,18 +2,26 @@ import React from 'react'
 import { Menu } from 'antd'
 import { MenuFoldOutlined, YoutubeOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
+// import { Link } from 'react-router-dom'
 
-import { getPlaylists } from '../../states'
+import { getPlaylists, selectedPlaylist } from '../../states'
 
-function Sidebar () {
-  const playlist = useSelector(getPlaylists).playlist
+export default function Sidebar () {
+  const dispatch = useDispatch()
+  const playlistState = useSelector(getPlaylists)
+  const playlists = playlistState.playlist
+
+  const handleClick = (item) => {
+    dispatch(selectedPlaylist(item.id))
+    console.log(playlistState.playlistSelected)
+  }
 
   return (
     <div>
       <div className='playlist-icon'><YoutubeOutlined style={{ color: 'red', fontSize: '55px' }} /> Youtube </div>
       <div className='playlist-menu'>
         <Menu defaultSelectedKeys={['4']}>
-          {playlist.map(item => (
+          {playlists.map(item => (
             <Menu.Item
               key={item.id}
               icon={<MenuFoldOutlined style={{ fontSize: '25px' }} />}
@@ -26,7 +34,7 @@ function Sidebar () {
                 marginBottom: '15px',
                 marginLeft: '20px'
               }}
-              onClick={() => console.log(playlist)}
+              onClick={() => handleClick(item)}
             >
               {item.playlistTitle}
             </Menu.Item>
@@ -36,5 +44,3 @@ function Sidebar () {
     </div>
   )
 }
-
-export default Sidebar

@@ -24,6 +24,7 @@ export
   addVideoToPlaylist,
   checkedPlaylist,
   unCheckedPlaylist,
+  selectedPlaylist,
   getInforVideo,
   getPlaylists
 } from './modules/playlist/index'
