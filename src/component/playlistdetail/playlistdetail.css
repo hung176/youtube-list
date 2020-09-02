@@ -2,6 +2,7 @@
   transition: all 0.3s linear;
   height: fit-content;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .video-in-playlist  h4 {
@@ -11,4 +12,5 @@
 
 .video-in-playlist:hover {
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }

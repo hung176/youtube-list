@@ -18,13 +18,13 @@ const initialState = {
       id: playlistId++,
       playlistTitle: 'mikami',
       isChecked: false,
-      videos: [{}]
+      videos: []
     },
     {
       id: playlistId++,
       playlistTitle: 'chelsea',
       isChecked: false,
-      videos: [{ idVideo: '5Ctf3OxePJQ', image: 'https://i.ytimg.com/vi/5Ctf3OxePJQ/mqdefault_live.jpg', videoTitle: '뉴스A (2020. 09. 01) / 2분기 성장률 -3.2%, 이재용 부회장 불구속 기소' }]
+      videos: []
     }
   ],
   playlistSelected: {},
@@ -73,11 +73,9 @@ export default function playlistReducer (state = initialState, action) {
       }
 
     case SELECTED_PLAYLIST:
-      const [playlistSelected] = state.playlist.filter(pl => pl.id === action.payload)
-
       return {
         ...state,
-        playlistSelected: playlistSelected
+        playlistSelected: state.playlist.filter(pl => pl.id === action.payload)
       }
 
     default:

@@ -1,26 +1,29 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Home from './component/home/Home'
-import PlaylistDetail from './component/playlistdetail/PlaylistDetail'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
 
+const PlaylistDetail = React.lazy(() => import('./component/playlistdetail/PlaylistDetail'))
+
 function App () {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
 
-        <Route path='/playlist'>
-          <PlaylistDetail />
-        </Route>
+          <Route path='/playlist'>
+            <PlaylistDetail />
+          </Route>
 
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+    </Suspense>
   )
 }
 

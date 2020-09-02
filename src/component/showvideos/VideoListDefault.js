@@ -27,7 +27,9 @@ export default function VideoListDefault () {
     const InforVideo = {
       idVideo: item.id.videoId,
       videoTitle: item.snippet.title,
-      image: item.snippet.thumbnails.medium.url
+      image: item.snippet.thumbnails.medium.url,
+      imageSmall: item.snippet.thumbnails.default.url,
+      imageLarge: item.snippet.thumbnails.high.url
     }
     dispatch(getInforVideo(InforVideo))
     showModal()

@@ -2,18 +2,20 @@ import React from 'react'
 import { Menu } from 'antd'
 import { MenuFoldOutlined, YoutubeOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
-// import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 import { getPlaylists, selectedPlaylist } from '../../states'
 
 export default function Sidebar () {
+  const { push } = useHistory()
+
   const dispatch = useDispatch()
   const playlistState = useSelector(getPlaylists)
   const playlists = playlistState.playlist
 
   const handleClick = (item) => {
     dispatch(selectedPlaylist(item.id))
-    console.log(playlistState.playlistSelected)
+    push(`/playlist/${item.playlistTitle}`)
   }
 
   return (

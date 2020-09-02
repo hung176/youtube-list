@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { SearchOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
@@ -12,7 +12,8 @@ const { Option } = AutoComplete
 export default function SearchBar () {
   const dispatch = useDispatch()
   const [queries, setQueries] = useState('')
-  const [option, setOption] = useState([])
+  // const [option, setOption] = useState([])
+  const option = ['a', 'b']
 
   // useEffect(() => {
   //   if (queries !== '') {
@@ -32,17 +33,18 @@ export default function SearchBar () {
       <form onSubmit={handleSubmit}>
         <AutoComplete
           className='search-form'
+          allowClear
           size='large'
           onChange={(value) => setQueries(value)}
           value={queries}
-          placeholder='Enter some text here...'
+          placeholder='Tìm kiếm...'
         >
           {option.map((item, index) =>
             <Option
               key={index}
-              value={item.snippet.title}
+              value={item}
             >
-              {item.snippet.title}
+              {item}
             </Option>)}
         </AutoComplete>
         <Button
