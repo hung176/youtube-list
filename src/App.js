@@ -6,13 +6,14 @@ import {
   Route
 } from 'react-router-dom'
 import EmptyPage from './component/empty/Empty'
+import Loading from './component/loading/Loading'
 
 const PlaylistDetail = React.lazy(() => import('./component/playlistdetail/PlaylistDetail'))
 const PlayVideo = React.lazy(() => import('./component/playvideo/PlayVideo'))
 
 function App () {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <Router>
         <Switch>
           <Route exact path='/'>

@@ -12,8 +12,8 @@ const { Option } = AutoComplete
 export default function SearchBar () {
   const dispatch = useDispatch()
   const [queries, setQueries] = useState('')
-  // const [option, setOption] = useState([])
-  const option = ['a', 'b']
+  const [option, setOption] = useState([])
+
 
   // useEffect(() => {
   //   if (queries !== '') {
@@ -47,7 +47,7 @@ export default function SearchBar () {
             </Option>)}
         </AutoComplete>
         <Button
-          type='submit'
+          onClick={() => dispatch(SearchVideo(queries))}
           size='large'
         ><SearchOutlined />
         </Button>
