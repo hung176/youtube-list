@@ -3,10 +3,13 @@ import './showvideos.css'
 import { PlusCircleOutlined, PlayCircleOutlined, PlusCircleFilled } from '@ant-design/icons'
 import { Modal, List, Checkbox, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
+import Loading from '../loading/Loading'
 import
 {
   getVideos,
+  selectVideo,
   createPlaylistName,
   getInforVideo,
   getPlaylists,
@@ -16,9 +19,10 @@ import
 } from '../../states'
 
 export default function VideoListDefault () {
-  const { videos } = useSelector(getVideos)
+  const { isFetching, videos } = useSelector(getVideos)
   const { playlist } = useSelector(getPlaylists)
   const dispatch = useDispatch()
+  const { push } = useHistory()
 
   const [visibleModel, setVisibleModel] = useState(false)
   const [namePlaylist, setNamePlaylist] = useState('')
@@ -57,9 +61,16 @@ export default function VideoListDefault () {
     setNamePlaylist('')
   }
 
+  const handlePlay = (item) => {
+    push(`/playvideo/${item.id.videoId}`)
+    dispatch(selectVideo(item))
+  }
+
   return (
     <div>
+
       <div className='container-videoItem'>
+        {isFetching && <div style={{ position: 'absolute', top: '50%' }}><Loading /></div>}
         {videos.map(item => (
           <div className='videoItem' key={item.id.videoId}>
             <img
@@ -74,7 +85,10 @@ export default function VideoListDefault () {
               onClick={() => handleGetVideo(item)}
             />
 
-            <PlayCircleOutlined className='btn btn-play' />
+            <PlayCircleOutlined
+              className='btn btn-play'
+              onClick={() => handlePlay(item)}
+            />
           </div>
         ))}
       </div>

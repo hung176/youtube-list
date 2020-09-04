@@ -33,7 +33,6 @@ export default function SearchBar () {
       <form onSubmit={handleSubmit}>
         <AutoComplete
           className='search-form'
-          allowClear
           size='large'
           onChange={(value) => setQueries(value)}
           value={queries}

@@ -10,7 +10,6 @@ import Sidebar from '../sidebar/Sidebar'
 import './home.css'
 
 import { Layout } from 'antd'
-// import 'antd/dist/antd.css'
 const { Header, Content, Sider } = Layout
 
 export default function Home () {

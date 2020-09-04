@@ -5,8 +5,10 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import EmptyPage from './component/empty/Empty'
 
 const PlaylistDetail = React.lazy(() => import('./component/playlistdetail/PlaylistDetail'))
+const PlayVideo = React.lazy(() => import('./component/playvideo/PlayVideo'))
 
 function App () {
   return (
@@ -19,6 +21,14 @@ function App () {
 
           <Route path='/playlist'>
             <PlaylistDetail />
+          </Route>
+
+          <Route path='/playvideo'>
+            <PlayVideo />
+          </Route>
+
+          <Route path='/empty'>
+            <EmptyPage />
           </Route>
 
         </Switch>

@@ -16,7 +16,7 @@ export const combineReducer = combineReducers({
   [queriesNameSpace]: searchReducer
 })
 
-export { fetchVideos, getVideos } from './modules/videoshow/index'
+export { fetchVideos, getVideos, selectVideo } from './modules/videoshow/index'
 export { SearchVideo, getQueries } from './modules/searchvideos/index'
 export
 {

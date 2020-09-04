@@ -7,11 +7,13 @@ export const namespace = 'showvideo'
 export const FETCH_VIDEO_FETCHING = 'FETCH_VIDEO_FETCHING'
 export const FETCH_VIDEO_SUCCESS = 'FETCH_VIDEO_SUCCESS'
 export const FETCH_VIDEO_ERROR = 'FETCH_VIDEO_ERROR'
+export const SELECT_VIDEO = 'SELECT_VIDEO'
 
 // reducer
 export default function videosReducer (state = {
   isFetching: false,
   videos: [],
+  selectVideo: {},
   error: null
 }, action) {
   switch (action.type) {
@@ -31,6 +33,11 @@ export default function videosReducer (state = {
       return Object.assign({}, state, {
         isFetching: false,
         error: action.payload
+      })
+
+    case SELECT_VIDEO:
+      return Object.assign({}, state, {
+        selectVideo: action.payload
       })
 
     default:
@@ -56,5 +63,11 @@ export const fetchVideos = (queries) => dispatch => {
     }))
 }
 
+export const selectVideo = (video) => {
+  return {
+    type: SELECT_VIDEO,
+    payload: video
+  }
+}
 // selector
 export const getVideos = (state) => state[namespace]

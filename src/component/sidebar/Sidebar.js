@@ -14,13 +14,24 @@ export default function Sidebar () {
   const playlists = playlistState.playlist
 
   const handleClick = (item) => {
+    item.videos.length === 0
+      ? push('/empty')
+      : push(`/playlist/${item.playlistTitle}`)
     dispatch(selectedPlaylist(item.id))
-    push(`/playlist/${item.playlistTitle}`)
   }
 
   return (
     <div>
-      <div className='playlist-icon'><YoutubeOutlined style={{ color: 'red', fontSize: '55px' }} /> Youtube </div>
+      <div
+        className='playlist-icon'
+        style={{ cursor: 'pointer' }}
+        onClick={() => push('/')}
+      >
+        <YoutubeOutlined
+          style={{ color: 'red', fontSize: '55px' }}
+        /> Youtube
+      </div>
+
       <div className='playlist-menu'>
         <Menu defaultSelectedKeys={['4']}>
           {playlists.map(item => (
