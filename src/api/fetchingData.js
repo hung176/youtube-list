@@ -1,5 +1,5 @@
 export default function fetchingData (queries) {
   return (
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${queries}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${queries}&type=video&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
   )
 }

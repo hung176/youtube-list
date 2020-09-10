@@ -16,3 +16,43 @@
   height: 100%;
   border: 0;
 }
+
+.site-layout-background .edit-input {
+  margin-bottom: 20px;
+}
+
+.edit-input input{
+  background-color: transparent;
+  border: 0;
+  width: 200px;
+  font-size: 30px;
+}
+
+.edit-icon{
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.edit-input input:focus {
+ outline: none;
+}
+
+.edit-describe {
+  margin-bottom: 20px;
+ }
+
+.edit-describe textarea {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 20px;
+  font-style: italic;
+  width: 100%;
+  border: 0px;
+ }
+
+.edit-describe textarea:focus {
+  outline: none;
+ }
+
+
+
+

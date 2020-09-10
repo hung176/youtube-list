@@ -63,7 +63,7 @@ export const fetchVideos = (queries) => dispatch => {
     }))
 }
 
-export const selectVideo = (video) => {
+export const selectVideoItem = (video) => {
   return {
     type: SELECT_VIDEO,
     payload: video

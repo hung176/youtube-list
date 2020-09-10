@@ -4,28 +4,29 @@ import { PlusCircleOutlined, PlayCircleOutlined, PlusCircleFilled } from '@ant-d
 import { Modal, List, Checkbox, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import { v4 as uuidv4 } from 'uuid'
 
 import Loading from '../loading/Loading'
 import
 {
   getVideos,
-  selectVideo,
+  selectVideoItem,
   createPlaylistName,
-  getInforVideo,
   getPlaylists,
-  checkedPlaylist,
-  unCheckedPlaylist,
   addVideoToPlaylist
 } from '../../states'
 
 export default function VideoListDefault () {
-  const { isFetching, videos } = useSelector(getVideos)
-  const { playlist } = useSelector(getPlaylists)
+  const { isFetching, videos, selectVideo } = useSelector(getVideos)
+  const playlists = useSelector(getPlaylists)
+  const playlistItem = Object.values(playlists)
+
   const dispatch = useDispatch()
   const { push } = useHistory()
 
   const [visibleModel, setVisibleModel] = useState(false)
   const [namePlaylist, setNamePlaylist] = useState('')
+  const [idPlaylist, setIdPlaylist] = useState(null)
 
   const handleGetVideo = (item) => {
     const InforVideo = {
@@ -35,35 +36,42 @@ export default function VideoListDefault () {
       imageSmall: item.snippet.thumbnails.default.url,
       imageLarge: item.snippet.thumbnails.high.url
     }
-    dispatch(getInforVideo(InforVideo))
+    dispatch(selectVideoItem(InforVideo))
     showModal()
   }
 
   const showModal = () => setVisibleModel(true)
 
-  const onChange = (e, title) => {
-    dispatch(checkedPlaylist({ title, status: e.target.checked }))
+  const onChange = (e, id) => {
+    const status = e.target.checked
+    status ? setIdPlaylist(id) : setIdPlaylist(null)
   }
 
   const handleOk = e => {
-    dispatch(addVideoToPlaylist())
+    dispatch(addVideoToPlaylist(idPlaylist, selectVideo))
+    setIdPlaylist(null)
     setVisibleModel(false)
   }
 
   const handleCancel = e => {
     setVisibleModel(false)
-    dispatch(unCheckedPlaylist(false))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(createPlaylistName(namePlaylist))
-    setNamePlaylist('')
+    handleClick()
+  }
+
+  const handleClick = () => {
+    if (namePlaylist !== '') {
+      dispatch(createPlaylistName(uuidv4(), namePlaylist))
+      setNamePlaylist('')
+    }
   }
 
   const handlePlay = (item) => {
     push(`/playvideo/${item.id.videoId}`)
-    dispatch(selectVideo(item))
+    dispatch(selectVideoItem(item))
   }
 
   return (
@@ -110,19 +118,19 @@ export default function VideoListDefault () {
           />
           <PlusCircleFilled
             style={{ fontSize: '30px', marginLeft: '12px' }}
-            type='submit'
+            onClick={handleClick}
           />
         </form>
 
         <div>
           <List
-            dataSource={playlist}
+            dataSource={playlistItem}
             size='large'
             renderItem={item => (
-              <div>
+              <div key={item.id}>
                 <Checkbox
-                  checked={item.isChecked}
-                  onChange={(e) => onChange(e, item.playlistTitle)}
+                  checked={item.id === idPlaylist}
+                  onChange={(e) => onChange(e, item.id)}
                   style={{ fontSize: '22px' }}
                 >
                   {item.playlistTitle}

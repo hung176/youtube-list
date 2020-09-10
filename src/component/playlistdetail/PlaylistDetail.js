@@ -1,28 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Sidebar from '../sidebar/Sidebar'
-import { Layout, Card, Row, Col } from 'antd'
-import { TwitterCircleFilled, FacebookFilled } from '@ant-design/icons'
+import SearchBar from '../searchbar/SearchBar'
+import { Layout, Card, Row, Col, Button } from 'antd'
+import { TwitterCircleFilled, FacebookFilled, EditOutlined } from '@ant-design/icons'
 import './playlistdetail.css'
 
-import { useSelector } from 'react-redux'
-import { getPlaylists } from '../../states'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { getPlaylists, editPlaylistName, addDescription } from '../../states'
 
 const { Sider, Content, Footer, Header } = Layout
 const { Meta } = Card
 
 export default function PlaylistDetail () {
-  const playlistState = useSelector(getPlaylists)
-  const [playlistSelected] = playlistState.playlistSelected
-  const videos = playlistSelected.videos
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const myInp = useRef(null)
+
+  const playlist = useSelector(getPlaylists)
+  const id = location.state.id
+  const playlistItem = playlist[id]
+
+  const { videos, playlistTitle, description } = playlistItem
 
   const [videoId, setVideoId] = useState(videos[0].idVideo)
   const [videoTitle, setVideoTitle] = useState(videos[0].videoTitle)
+  const [disabledInput, setDisabledInput] = useState(false)
 
   const handleClick = (id, title) => {
     setVideoId(id)
     setVideoTitle(title)
   }
 
+  const handleChange = (e) => {
+    const newName = e.target.value
+    dispatch(editPlaylistName(id, newName))
+  }
+
+  const handleInput = () => {
+    setDisabledInput(false)
+    myInp.current.focus()
+  }
+
+  const handleDescription = (e) => {
+    dispatch(addDescription(id, e.target.value))
+  }
   return (
     <div>
       <Layout>
@@ -38,12 +60,40 @@ export default function PlaylistDetail () {
         <Layout>
           <Header
             className='site-layout-sub-header-background'
-            style={{ padding: 0, textAlign: 'center', fontSize: '20px', color: '#273747' }}
           >
-            <h2>{playlistSelected.playlistTitle}</h2>
+            <SearchBar />
           </Header>
+
           <Content style={{ margin: '24px 16px 0' }}>
             <div className='site-layout-background' style={{ padding: 24, minHeight: 360 }}>
+              <div className='edit-input'>
+                <input
+                  type='text'
+                  value={playlistTitle}
+                  onChange={handleChange}
+                  disabled={disabledInput}
+                  ref={myInp}
+                />
+                <EditOutlined
+                  className='edit-icon'
+                  onClick={handleInput}
+                />
+                <div>
+                  <Button
+                    type='primary'
+                    shape='round'
+                  >Tổng cộng có {videos.length} videos
+                  </Button>
+                </div>
+
+              </div>
+              <div className='edit-describe'>
+                <textarea
+                  placeholder='Thêm miêu tả cho playlist...'
+                  value={description}
+                  onChange={handleDescription}
+                />
+              </div>
               <div className='video-avatar'>
                 <iframe
                   src={`https://www.youtube.com/embed/${videoId}`}
@@ -54,7 +104,7 @@ export default function PlaylistDetail () {
               <Row
                 gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}
               >
-                {videos.map(video => (
+                {videos && videos.map(video => (
                   <Col
                     className='gutter-row'
                     xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 6 }}

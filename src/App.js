@@ -3,7 +3,8 @@ import Home from './component/home/Home'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 import EmptyPage from './component/empty/Empty'
 import Loading from './component/loading/Loading'
@@ -13,7 +14,7 @@ const PlayVideo = React.lazy(() => import('./component/playvideo/PlayVideo'))
 
 function App () {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<div style={{ position: 'absolute', top: '50%', left: '50%' }}><Loading /></div>}>
       <Router>
         <Switch>
           <Route exact path='/'>
@@ -31,7 +32,7 @@ function App () {
           <Route path='/empty'>
             <EmptyPage />
           </Route>
-
+          <Redirect to='/' />
         </Switch>
       </Router>
     </Suspense>
