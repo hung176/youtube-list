@@ -17,8 +17,10 @@ export default function Home () {
   const queries = useSelector(getQueries)
 
   useEffect(() => {
-    console.log('useEffect1 has called')
-    compose(dispatch, fetchVideos)(queries)
+    if (queries !== '') {
+      console.log('useEffect1 has called')
+      compose(dispatch, fetchVideos)(queries)
+    }
   }, [dispatch, queries])
 
   return (

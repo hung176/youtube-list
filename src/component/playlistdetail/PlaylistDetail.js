@@ -25,7 +25,7 @@ export default function PlaylistDetail () {
 
   const [videoId, setVideoId] = useState(videos[0].idVideo)
   const [videoTitle, setVideoTitle] = useState(videos[0].videoTitle)
-  const [disabledInput, setDisabledInput] = useState(false)
+  const [disabledInput, setDisabledInput] = useState(true)
 
   const handleClick = (id, title) => {
     setVideoId(id)
