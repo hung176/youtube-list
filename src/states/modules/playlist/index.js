@@ -7,6 +7,8 @@ const ADD_VIDEO_TO_PLAYLIST = 'ADD_VIDEO_TO_PLAYLIST'
 const ADD_PLAYLIST_NAME = 'ADD_PLAYLIST_NAME'
 const EDIT_PLAYLIST_NAME = 'EDIT_PLAYLIST_NAME'
 const ADD_DESCRIPTION_PLAYLIST = 'ADD_DESCRIPTION_PLAYLIST'
+const DELETE_PLAYLIST = 'DELETE_PLAYLIST'
+const DELETE_VIDEO_FROM_PLAYLIST = 'DELETE_VIDEO_FROM_PLAYLIST'
 
 const initialState = {
   1: {
@@ -82,6 +84,27 @@ function addDescriptionReducer (state, action) {
   }
 }
 
+// delete video
+function deleteVideoReducer (state, action) {
+  const { idPlaylist, idVideo } = action.payload
+  const videosFiltered = state[idPlaylist].videos.filter(video => video.idVideo !== idVideo)
+  return {
+    ...state,
+    [idPlaylist]: {
+      ...state[idPlaylist],
+      videos: videosFiltered
+    }
+  }
+}
+
+// delete Playlist
+function deletePlaylistReducer (state, action) {
+  const idPlaylist = action.payload
+  const removePlaylist = { ...state }
+  delete removePlaylist[idPlaylist]
+  return removePlaylist
+}
+
 // reducer
 export default function playlistReducer (state = initialState, action) {
   switch (action.type) {
@@ -96,6 +119,12 @@ export default function playlistReducer (state = initialState, action) {
 
     case ADD_DESCRIPTION_PLAYLIST:
       return addDescriptionReducer(state, action)
+
+    case DELETE_VIDEO_FROM_PLAYLIST:
+      return deleteVideoReducer(state, action)
+
+    case DELETE_PLAYLIST:
+      return deletePlaylistReducer(state, action)
 
     default:
       return state
@@ -142,6 +171,23 @@ export const addVideoToPlaylist = (id, video) => {
       id,
       video
     }
+  }
+}
+
+export const deleteVideoFromPlaylist = (idPlaylist, idVideo) => {
+  return {
+    type: DELETE_VIDEO_FROM_PLAYLIST,
+    payload: {
+      idPlaylist,
+      idVideo
+    }
+  }
+}
+
+export const deletePlaylist = (idPlaylist) => {
+  return {
+    type: DELETE_PLAYLIST,
+    payload: idPlaylist
   }
 }
 

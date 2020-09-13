@@ -19,5 +19,7 @@ export
   addVideoToPlaylist,
   getPlaylists,
   editPlaylistName,
-  addDescription
+  addDescription,
+  deleteVideoFromPlaylist,
+  deletePlaylist
 } from './modules/playlist/index'

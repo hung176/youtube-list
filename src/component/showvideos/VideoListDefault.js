@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './showvideos.css'
-import { PlusCircleOutlined, PlayCircleOutlined, PlusCircleFilled } from '@ant-design/icons'
+import { PlayCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons'
 import { Modal, List, Checkbox, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
@@ -88,12 +88,12 @@ export default function VideoListDefault () {
             />
             <h4>{item.snippet.title}</h4>
 
-            <PlusCircleOutlined
+            <PlusCircleTwoTone
               className='btn btn-add'
               onClick={() => handleGetVideo(item)}
             />
 
-            <PlayCircleOutlined
+            <PlayCircleTwoTone
               className='btn btn-play'
               onClick={() => handlePlay(item)}
             />
@@ -116,7 +116,7 @@ export default function VideoListDefault () {
             value={namePlaylist}
             onChange={(e) => setNamePlaylist(e.target.value)}
           />
-          <PlusCircleFilled
+          <PlusCircleTwoTone
             style={{ fontSize: '30px', marginLeft: '12px' }}
             onClick={handleClick}
           />

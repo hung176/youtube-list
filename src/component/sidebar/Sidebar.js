@@ -1,17 +1,17 @@
 import React from 'react'
 import { Menu } from 'antd'
-import { MenuFoldOutlined, YoutubeOutlined } from '@ant-design/icons'
-import { useSelector } from 'react-redux'
+import { DeleteFilled, YoutubeOutlined } from '@ant-design/icons'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
-import { getPlaylists } from '../../states'
+import { getPlaylists, deletePlaylist } from '../../states'
 
 export default function Sidebar () {
   const { push } = useHistory()
 
-  // const dispatch = useDispatch()
-  const playlistState = useSelector(getPlaylists)
-  const playlists = Object.values(playlistState)
+  const dispatch = useDispatch()
+  const allPlaylist = useSelector(getPlaylists)
+  const playlists = Object.values(allPlaylist)
 
   const handleClick = (item) => {
     item.videos.length === 0
@@ -36,19 +36,24 @@ export default function Sidebar () {
           {playlists.map(item => (
             <Menu.Item
               key={item.id}
-              icon={<MenuFoldOutlined style={{ fontSize: '25px' }} />}
+              icon={
+                <DeleteFilled
+                  style={{ fontSize: '20px' }}
+                  onClick={() => dispatch(deletePlaylist(item.id))}
+                />
+              }
               style={{
                 fontSize: '23px',
                 display: 'flex',
+                flexDirection: 'row-reverse',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 color: '#273747',
-                letterSpacing: '2px',
-                marginBottom: '15px',
-                marginLeft: '20px'
+                letterSpacing: '1px',
+                marginBottom: '15px'
               }}
-              onClick={() => handleClick(item)}
             >
-              {item.playlistTitle}
+              <span onClick={() => handleClick(item)}>{item.playlistTitle} </span>
             </Menu.Item>
           ))}
         </Menu>

@@ -3,10 +3,9 @@ import Home from './component/home/Home'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from 'react-router-dom'
-import EmptyPage from './component/empty/Empty'
+import EmptyPage from './component/empty/EmptyComponent'
 import Loading from './component/loading/Loading'
 
 const PlaylistDetail = React.lazy(() => import('./component/playlistdetail/PlaylistDetail'))
@@ -32,7 +31,7 @@ function App () {
           <Route path='/empty'>
             <EmptyPage />
           </Route>
-          <Redirect to='/' />
+
         </Switch>
       </Router>
     </Suspense>

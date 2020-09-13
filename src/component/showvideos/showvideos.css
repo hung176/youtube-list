@@ -1,4 +1,3 @@
-
 .container-videoItem {
   display: flex;
   flex-wrap: wrap;
@@ -31,7 +30,6 @@
 .btn {
   position: absolute;
   font-size: 40px;
-  color: #FF4D4D;
   opacity: 0;
   transition: 1s ease;
   cursor: pointer;
@@ -50,4 +48,3 @@
   top: 35%;
   left: 35%;
 }
-
