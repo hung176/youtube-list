@@ -7,10 +7,12 @@ import { useHistory } from 'react-router'
 import { v4 as uuidv4 } from 'uuid'
 
 import Loading from '../loading/Loading'
+// import ModalPlaylist from '../Modal/ModalPlaylist'
 import
 {
   getVideos,
   selectVideoItem,
+  toggleCheckbox,
   createPlaylistName,
   getPlaylists,
   addVideoToPlaylist
@@ -26,7 +28,6 @@ export default function VideoListDefault () {
 
   const [visibleModel, setVisibleModel] = useState(false)
   const [namePlaylist, setNamePlaylist] = useState('')
-  const [idPlaylist, setIdPlaylist] = useState(null)
 
   const handleGetVideo = (item) => {
     const InforVideo = {
@@ -44,16 +45,15 @@ export default function VideoListDefault () {
 
   const onChange = (e, id) => {
     const status = e.target.checked
-    status ? setIdPlaylist(id) : setIdPlaylist(null)
+    dispatch(toggleCheckbox(id, status))
   }
 
-  const handleOk = e => {
-    dispatch(addVideoToPlaylist(idPlaylist, selectVideo))
-    setIdPlaylist(null)
+  const handleOk = () => {
+    dispatch(addVideoToPlaylist(selectVideo))
     setVisibleModel(false)
   }
 
-  const handleCancel = e => {
+  const handleCancel = () => {
     setVisibleModel(false)
   }
 
@@ -129,7 +129,7 @@ export default function VideoListDefault () {
             renderItem={item => (
               <div key={item.id}>
                 <Checkbox
-                  checked={item.id === idPlaylist}
+                  checked={item.isChecked}
                   onChange={(e) => onChange(e, item.id)}
                   style={{ fontSize: '22px' }}
                 >
@@ -140,6 +140,15 @@ export default function VideoListDefault () {
           />
         </div>
       </Modal>
+      {/* <ModalPlaylist
+        visibleModel={visibleModel}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+        handleSubmit={handleSubmit}
+        handleClick={handleClick}
+        playlistItem={playlistItem}
+        onChange={onChange}
+      /> */}
     </div>
   )
 }

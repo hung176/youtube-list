@@ -20,6 +20,10 @@ export default function SearchBar () {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    handleSearch()
+  }
+
+  const handleSearch = () => {
     dispatch(SearchVideo(queries))
     setQueries('')
     push('/')
@@ -48,7 +52,7 @@ export default function SearchBar () {
             </Option>)}
         </AutoComplete>
         <Button
-          onClick={() => dispatch(SearchVideo(queries))}
+          onClick={handleSearch}
           size='large'
         ><SearchOutlined />
         </Button>

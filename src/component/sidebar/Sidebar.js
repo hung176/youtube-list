@@ -1,10 +1,12 @@
 import React from 'react'
-import { Menu } from 'antd'
-import { DeleteFilled, YoutubeOutlined } from '@ant-design/icons'
+import { Menu, Modal } from 'antd'
+import { DeleteFilled, YoutubeOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
 import { getPlaylists, deletePlaylist } from '../../states'
+
+const { confirm } = Modal
 
 export default function Sidebar () {
   const { push } = useHistory()
@@ -17,6 +19,17 @@ export default function Sidebar () {
     item.videos.length === 0
       ? push('/empty')
       : push(`/playlist/${item.playlistTitle}`, { id: item.id })
+  }
+
+  // Modal delete playlist
+  function showConfirm (id, name) {
+    confirm({
+      title: `Do you Want to delete playlist ${name}?`,
+      icon: <ExclamationCircleOutlined />,
+      onOk () {
+        dispatch(deletePlaylist(id))
+      }
+    })
   }
 
   return (
@@ -39,7 +52,7 @@ export default function Sidebar () {
               icon={
                 <DeleteFilled
                   style={{ fontSize: '20px' }}
-                  onClick={() => dispatch(deletePlaylist(item.id))}
+                  onClick={() => showConfirm(item.id, item.playlistTitle)}
                 />
               }
               style={{

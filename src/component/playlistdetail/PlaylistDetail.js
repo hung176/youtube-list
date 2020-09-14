@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import SearchBar from '../searchbar/SearchBar'
 import EmptyPage from '../empty/EmptyComponent'
-import { Layout, Card, Row, Col, Button, Empty } from 'antd'
+import {
+  Layout, Card, Row, Col, Button, Empty
+} from 'antd'
 import {
   TwitterCircleFilled,
   FacebookFilled,
   EditOutlined,
-  DeleteFilled
+  DeleteFilled,
+  PlusCircleFilled,
+  InteractionFilled
 } from '@ant-design/icons'
 import './playlistdetail.css'
 
@@ -54,7 +58,7 @@ export default function PlaylistDetail () {
     }
   }, [inputRef, disabledInput, videos.length])
 
-  const handleClick = (id, title) => {
+  const handleClickToFrame = (id, title) => {
     setVideoId(id)
     setVideoTitle(title)
   }
@@ -102,7 +106,6 @@ export default function PlaylistDetail () {
                   />
                   <EditOutlined
                     className='edit-icon'
-                    id='edit-icon-id'
                     onClick={() => setDisabledInput(false)}
                   />
                   <div>
@@ -135,24 +138,34 @@ export default function PlaylistDetail () {
                     <Col
                       className='gutter-row'
                       xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 6 }}
-                      onClick={() => handleClick(video.idVideo, video.videoTitle)}
                       key={video.idVideo}
                     >
                       <Card
                         hoverable
-                        cover={<img alt={video.videoTitle} src={video.image} />}
+                        cover={
+                          <img
+                            alt={video.videoTitle}
+                            src={video.image}
+                            onClick={() => handleClickToFrame(video.idVideo, video.videoTitle)}
+                          />
+                        }
                         actions={[
                           <DeleteFilled
                             key='delete'
-                            size='large'
+                            style={{ fontSize: '23px' }}
                             onClick={() => dispatch(deleteVideoFromPlaylist(id, video.idVideo))}
                           />,
-                          <Button key='switch' type='primary' size='small' shape='round'>
-                            Switch to
-                          </Button>
+                          <PlusCircleFilled
+                            key='add'
+                            style={{ fontSize: '23px' }}
+                          />,
+                          <InteractionFilled
+                            key='switch'
+                            style={{ fontSize: '23px' }}
+                          />
                         ]}
                       >
-                        <Meta title={video.videoTitle} description='www.youtube.com' />
+                        <Meta title={video.videoTitle} />
                       </Card>
                     </Col>
                   ))}
