@@ -4,9 +4,9 @@ import { compose } from 'redux'
 
 import { fetchVideos, getQueries } from '../../states'
 
-import SearchBar from '../searchbar/SearchBar'
-import VideoListDefault from '../showvideos/VideoListDefault'
-import Sidebar from '../sidebar/Sidebar'
+import SearchBar from '../SearchBar'
+import VideoListDefault from '../../component/VideoListDefault'
+import Sidebar from '../Sidebar'
 import './home.css'
 
 import { Layout } from 'antd'

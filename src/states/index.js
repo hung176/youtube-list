@@ -16,8 +16,7 @@ export { SearchVideo, getQueries } from './modules/searchvideos/index'
 export
 {
   createPlaylistName,
-  toggleCheckbox,
-  addVideoToPlaylist,
+  addVideoToPlaylists,
   getPlaylists,
   editPlaylistName,
   addDescription,

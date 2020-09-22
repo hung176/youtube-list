@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react'
-import Home from './component/home/Home'
+import Home from './pages/home/Home'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
-import EmptyPage from './component/empty/EmptyComponent'
-import Loading from './component/loading/Loading'
+import EmptyPage from './component/EmptyComponent'
+import Loading from './component/Loading'
 
-const PlaylistDetail = React.lazy(() => import('./component/playlistdetail/PlaylistDetail'))
+const PlaylistDetail = React.lazy(() => import('./pages/playlist/PlaylistDetail'))
 const PlayVideo = React.lazy(() => import('./component/playvideo/PlayVideo'))
 
 function App () {

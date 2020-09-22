@@ -3,8 +3,7 @@
 export const namespace = 'playlist'
 
 // actions
-const ADD_VIDEO_TO_PLAYLIST = 'ADD_VIDEO_TO_PLAYLIST'
-const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX'
+const ADD_VIDEO_TO_PLAYLISTS = 'ADD_VIDEO_TO_PLAYLIST'
 const ADD_PLAYLIST_NAME = 'ADD_PLAYLIST_NAME'
 const EDIT_PLAYLIST_NAME = 'EDIT_PLAYLIST_NAME'
 const ADD_DESCRIPTION_PLAYLIST = 'ADD_DESCRIPTION_PLAYLIST'
@@ -16,7 +15,6 @@ const initialState = {
     id: 1,
     playlistTitle: 'mikami',
     description: '',
-    isChecked: false,
     videos: []
   },
 
@@ -24,7 +22,6 @@ const initialState = {
     id: 2,
     playlistTitle: 'chelsea',
     description: 'Chelsea Football Club are an English professional football club based in Fulham, London. Founded in 1905, the club competes in the Premier League, the top division of English football. Chelsea are among England most successful clubs, having won over thirty competitive honours, including six league titles and six European trophies. Their home ground is Stamford Bridge',
-    isChecked: false,
     videos: []
   }
 }
@@ -38,39 +35,22 @@ function addPlaylistName (state, action) {
   }
 }
 
-// toggle checkbox
-function toggleCheckboxReducer (state, action) {
-  const { id, status } = action.payload
-  return {
-    ...state,
-    [id]: {
-      ...state[id],
-      isChecked: status
-    }
-  }
-}
-
 // add video to playlist
 function addVideo (state, action) {
-  const idArr = Object.keys(state)
-  const video = action.payload
+  const { id, video } = action.payload
+  const idVideo = video.idVideo
+  const isExistVideo = state[id].videos.some(video => video.idVideo === idVideo)
 
-  const valueArr = Object.values(state).map(obj => {
-    const isExistVideo = obj.videos.map(val => val.idVideo)
-
-    if (obj.isChecked && !isExistVideo.includes(video.idVideo)) {
-      obj.videos = [...obj.videos, video]
+  if (isExistVideo) return state
+  else {
+    return {
+      ...state,
+      [id]: {
+        ...state[id],
+        videos: [...state[id].videos, video]
+      }
     }
-    obj.isChecked = false
-    return obj
-  })
-
-  const newState = {}
-  idArr.forEach((key, index) => {
-    newState[key] = valueArr[index]
-  })
-
-  return newState
+  }
 }
 
 // edit playlist name
@@ -124,7 +104,7 @@ export default function playlistReducer (state = initialState, action) {
     case ADD_PLAYLIST_NAME:
       return addPlaylistName(state, action)
 
-    case ADD_VIDEO_TO_PLAYLIST:
+    case ADD_VIDEO_TO_PLAYLISTS:
       return addVideo(state, action)
 
     case EDIT_PLAYLIST_NAME:
@@ -138,9 +118,6 @@ export default function playlistReducer (state = initialState, action) {
 
     case DELETE_PLAYLIST:
       return deletePlaylistReducer(state, action)
-
-    case TOGGLE_CHECKBOX:
-      return toggleCheckboxReducer(state, action)
 
     default:
       return state
@@ -156,16 +133,6 @@ export function createPlaylistName (id, playlistTitle) {
       playlistTitle,
       isChecked: false,
       videos: []
-    }
-  }
-}
-
-export function toggleCheckbox (id, status) {
-  return {
-    type: TOGGLE_CHECKBOX,
-    payload: {
-      id,
-      status
     }
   }
 }
@@ -190,10 +157,13 @@ export function addDescription (id, text) {
   }
 }
 
-export const addVideoToPlaylist = (video) => {
+export const addVideoToPlaylists = (id, video) => {
   return {
-    type: ADD_VIDEO_TO_PLAYLIST,
-    payload: video
+    type: ADD_VIDEO_TO_PLAYLISTS,
+    payload: {
+      id,
+      video
+    }
   }
 }
 
