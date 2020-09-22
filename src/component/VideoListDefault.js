@@ -17,7 +17,7 @@ export default function VideoListDefault () {
 
   return (
     <div>
-      {isFetching && <div style={{ position: 'absolute', top: '50%', right: '50%' }}><Loading /></div>}
+      {isFetching && <div style={{ position: 'absolute', top: '50%', right: '50%', transform: 'translate(50%, 0%)' }}><Loading /></div>}
       <Row
         gutter={[16, { xs: 16, sm: 16, md: 24, lg: 32 }]}
       >
