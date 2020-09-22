@@ -3,20 +3,20 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import { SearchOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css'
-import '../../App.css'
+import '../App.css'
 import { AutoComplete, Button } from 'antd'
 
-import { SearchVideo } from '../../states'
+import { SearchVideo } from '../states'
 // import { suggest } from '../../api/suggest'
 
-const { Option } = AutoComplete
+// const { Option } = AutoComplete
 
 export default function SearchBar () {
   const dispatch = useDispatch()
   const { push } = useHistory()
 
   const [queries, setQueries] = useState('')
-  const [option, setOption] = useState([])
+  // const [option, setOption] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -43,13 +43,13 @@ export default function SearchBar () {
           value={queries}
           placeholder='Tìm kiếm...'
         >
-          {option.map((item, index) =>
+          {/* {option.map((item, index) =>
             <Option
               key={index}
               value={item}
             >
               {item}
-            </Option>)}
+            </Option>)} */}
         </AutoComplete>
         <Button
           onClick={handleSearch}

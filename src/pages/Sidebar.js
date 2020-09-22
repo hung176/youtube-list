@@ -4,7 +4,7 @@ import { DeleteFilled, YoutubeOutlined, ExclamationCircleOutlined } from '@ant-d
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 
-import { getPlaylists, deletePlaylist } from '../../states'
+import { getPlaylists, deletePlaylist } from '../states'
 
 const { confirm } = Modal
 

@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Sidebar from '../sidebar/Sidebar'
-import SearchBar from '../searchbar/SearchBar'
-import EmptyPage from '../empty/EmptyComponent'
-import {
-  Layout, Card, Row, Col, Button, Empty
-} from 'antd'
-import {
-  TwitterCircleFilled,
-  FacebookFilled,
-  EditOutlined,
-  DeleteFilled,
-  PlusCircleFilled,
-  InteractionFilled
-} from '@ant-design/icons'
+import Sidebar from '../Sidebar'
+import SearchBar from '../SearchBar'
+import EmptyPage from '../../component/EmptyComponent'
+import VideoItems from '../../component/VideoItems'
+import { Layout, Row, Col, Button, Empty } from 'antd'
+import { TwitterCircleFilled, FacebookFilled, EditOutlined } from '@ant-design/icons'
 import './playlistdetail.css'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -25,12 +17,10 @@ import {
 } from '../../states'
 
 const { Sider, Content, Footer, Header } = Layout
-const { Meta } = Card
 
 export default function PlaylistDetail () {
   const [disabledInput, setDisabledInput] = useState(true)
   const [videoId, setVideoId] = useState(null)
-  const [videoTitle, setVideoTitle] = useState(null)
   const inputRef = React.createRef()
 
   const dispatch = useDispatch()
@@ -53,15 +43,8 @@ export default function PlaylistDetail () {
   useEffect(() => {
     if (!disabledInput && videos.length !== 0) {
       inputRef.current.focus()
-    } else {
-      // Throw error 404, beer not found
     }
   }, [inputRef, disabledInput, videos.length])
-
-  const handleClickToFrame = (id, title) => {
-    setVideoId(id)
-    setVideoTitle(title)
-  }
 
   const handleChange = (e) => {
     const newName = e.target.value
@@ -70,6 +53,10 @@ export default function PlaylistDetail () {
 
   const handleDescription = (e) => {
     dispatch(addDescription(id, e.target.value))
+  }
+
+  const handleDeleteVideo = (id, idVideo) => {
+    dispatch(deleteVideoFromPlaylist(id, idVideo))
   }
 
   if (videos.length === 0 && playlistTitle === '') return (<Empty description='Not Found' />)
@@ -127,7 +114,7 @@ export default function PlaylistDetail () {
                 <div className='video-avatar'>
                   <iframe
                     src={`https://www.youtube.com/embed/${videoId}`}
-                    title={videoTitle}
+                    title={videoId}
                     allowFullScreen
                   />
                 </div>
@@ -137,36 +124,17 @@ export default function PlaylistDetail () {
                   {videos && videos.map(video => (
                     <Col
                       className='gutter-row'
-                      xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 6 }}
+                      xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }}
                       key={video.idVideo}
                     >
-                      <Card
-                        hoverable
-                        cover={
-                          <img
-                            alt={video.videoTitle}
-                            src={video.image}
-                            onClick={() => handleClickToFrame(video.idVideo, video.videoTitle)}
-                          />
-                        }
-                        actions={[
-                          <DeleteFilled
-                            key='delete'
-                            style={{ fontSize: '23px' }}
-                            onClick={() => dispatch(deleteVideoFromPlaylist(id, video.idVideo))}
-                          />,
-                          <PlusCircleFilled
-                            key='add'
-                            style={{ fontSize: '23px' }}
-                          />,
-                          <InteractionFilled
-                            key='switch'
-                            style={{ fontSize: '23px' }}
-                          />
-                        ]}
-                      >
-                        <Meta title={video.videoTitle} />
-                      </Card>
+                      <VideoItems
+                        idVideo={video.idVideo}
+                        thumbnailsUrl={video.thumbnailsUrl}
+                        title={video.title}
+                        playVideoFromPlayList={() => setVideoId(video.idVideo)}
+                        id={id}
+                        handleDeleteVideo={handleDeleteVideo}
+                      />
                     </Col>
                   ))}
                 </Row>

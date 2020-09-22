@@ -16,33 +16,6 @@
   border: 2px solid #FF4D4D;
 }
 
-.list-video-default {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 50px;
-}
-.videoItem {
-  width: 320px;
-  height: 212px;
-  margin-bottom: 50px;
-  margin-left: 20px;
-}
-.title {
-  margin-top: 10px;
-  color: black;
-  font-weight: 600;
-}
-
-.btn-play-list{
- font-size: 45px;
- color: #FF4D4D;
-}
-.playlist-item {
-  cursor: pointer;
-  font-size: 20px;
-  color: #FF4D4D
-}
 @media (max-width: 780px) {
   .search-form {
     width: 300px;
@@ -62,4 +35,12 @@
   .search-form {
     width: 150px;
   }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  font-size: 30px;
 }
